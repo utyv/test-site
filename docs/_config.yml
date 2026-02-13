@@ -1,0 +1,4 @@
+markdown: kramdown
+theme: jekyll-theme-minimal
+plugins:
+  - jekyll-seo-tag
