@@ -1,4 +1,4 @@
 markdown: kramdown
-theme: jekyll-theme-minimal
+theme: null
 plugins:
   - jekyll-seo-tag

@@ -1,0 +1,19 @@
+.highlight {
+    background-color: #ffffcc;
+    padding: 10px;
+    border-left: 4px solid #ffcc00;
+    margin: 15px 0;
+}
+
+.important {
+    font-weight: bold;
+    color: #d63384;
+    font-size: 1.1em;
+}
+
+.note {
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    padding: 12px;
+    border-radius: 4px;
+}
