@@ -1,23 +1,31 @@
-document.addEventListener('DOMContentLoaded', function() {
-    fetch('/test-site/data/content.json')
-        .then(response => response.json())
-        .then(data => {
-            const container = document.getElementById('dynamic-content');
-            if (container) {
-                let html = '<h2>Наши функции</h2><ul>';
-                data.features.forEach(feature => {
-                    html += `<li><strong>${feature.title}</strong>: ${feature.description}</li>`;
-                });
-                html += '</ul>';
+class ContentLoader {
+  constructor(jsonUrl) {
+    this.jsonUrl = jsonUrl;
+    this.data = null;
+  }
 
-                html += '<h2>Команда</h2><ul>';
-        data.team.forEach(member => {
-            html += `<li>${member.name} — ${member.role}</li>`;
-        });
-        html += '</ul>';
-
-        container.innerHTML = html;
+  async loadData() {
+    try {
+      const response = await fetch(this.jsonUrl);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      this.data = await response.json();
+      return this.data;
+    } catch (error) {
+      console.error('Ошибка загрузки данных:', error);
+      return null;
     }
-})
-.catch(error => console.error('Ошибка загрузки JSON:', error));
-});
+  }
+
+  filterByProperty(property, value) {
+    if (!this.data) {
+      console.warn('Данные ещё не загружены. Сначала вызовите loadData().');
+      return [];
+    }
+    return this.data.filter(item => item[property] === value);
+  }
+}
+
+// Экспортируем класс для использования в других модулях
+export { ContentLoader };
