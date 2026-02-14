@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('/data/content.json')
+    fetch('/test-site/data/content.json')
         .then(response => response.json())
         .then(data => {
             const container = document.getElementById('dynamic-content');
