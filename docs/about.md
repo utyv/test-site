@@ -1,27 +1,28 @@
 Несколько слов о сайте
 
-<div id="content">
-  <!-- Данные загрузятся сюда -->
-</div>
+## Раздел 1
+<div id="content-1">Загружаем...</div>
+
+## Раздел 2
+<div id="content-3">Загружаем...</div>
 
 <script type="module">
   import { ContentLoader } from '/test-site/js/content-loader.js';
 
   const loader = new ContentLoader('/test-site/data/content.json');
+  const placeholders = {
+    'content-1': 1,
+    'content-3': 3,
+    // Добавьте другие ID и их контейнеры
+  };
 
   loader.loadData().then(() => {
-    // Фильтруем данные по параметру (например, по категории 'news')
-    const filteredData = loader.filterByProperty('category', 'news');
-
-    // Выводим данные в элемент с ID 'content'
-    const container = document.getElementById('content');
-    if (container && filteredData.length > 0) {
-      container.innerHTML = filteredData.map(item =>
-        `<div class="item">
-          <h3>${item.title}</h3>
-          <p>${item.content}</p>
-        </div>`
-      ).join('');
-    }
+    Object.entries(placeholders).forEach(([containerId, id]) => {
+      const container = document.getElementById(containerId);
+      if (container) {
+        const content = loader.getContentById(id);
+        container.innerHTML = content || '<em>Не найдено</em>';
+      }
+    });
   });
 </script>

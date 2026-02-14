@@ -18,14 +18,14 @@ class ContentLoader {
     }
   }
 
-  filterByProperty(property, value) {
+  getContentById(id) {
     if (!this.data) {
       console.warn('Данные ещё не загружены. Сначала вызовите loadData().');
-      return [];
+      return null;
     }
-    return this.data.filter(item => item[property] === value);
+    const item = this.data.find(item => item.id === id);
+    return item ? item.content : null;
   }
 }
 
-// Экспортируем класс для использования в других модулях
 export { ContentLoader };
