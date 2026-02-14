@@ -5,9 +5,9 @@
 </div>
 
 <script type="module">
-  import { ContentLoader } from 'test-site/js/content-loader.js';
+  import { ContentLoader } from '/test-site/js/content-loader.js';
 
-  const loader = new ContentLoader('test-site/data/content.json');
+  const loader = new ContentLoader('/test-site/data/content.json');
 
   loader.loadData().then(() => {
     // Фильтруем данные по параметру (например, по категории 'news')
